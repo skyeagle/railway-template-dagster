@@ -1,0 +1,12 @@
+{
+  "Dagster Webserver": {
+    "DAGSTER_HOME": "/opt/dagster/dagster_home",
+    "DATABASE_URL": "${{PostgreSQL.DATABASE_URL}}",
+    "PORT": "3000"
+  },
+  "Dagster Daemon": {
+    "DAGSTER_HOME": "/opt/dagster/dagster_home",
+    "DATABASE_URL": "${{PostgreSQL.DATABASE_URL}}",
+    "PORT": "3001"
+  }
+}

@@ -1,0 +1,67 @@
+name: railway-dagster-template
+
+services:
+  postgres:
+    image: postgres:17.5-bookworm@sha256:fbcea1bd13b6a882cd6caa6b58db3ae5c102efe50ec625b3e2a5cbc50db5bfe4
+    environment:
+      POSTGRES_USER: dagster
+      POSTGRES_PASSWORD: local-dagster-password
+      POSTGRES_DB: dagster
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dagster -d dagster"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - dagster-postgres:/var/lib/postgresql/data
+
+  webserver:
+    build:
+      context: .
+    command: ["./scripts/start.sh", "webserver"]
+    environment:
+      DAGSTER_HOME: /opt/dagster/dagster_home
+      DATABASE_URL: postgresql://dagster:local-dagster-password@postgres:5432/dagster
+      PORT: "3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:3000/server_info', timeout=5)",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 60
+    ports:
+      - "3000:3000"
+
+  daemon:
+    build:
+      context: .
+    command: ["./scripts/start.sh", "daemon"]
+    environment:
+      DAGSTER_HOME: /opt/dagster/dagster_home
+      DATABASE_URL: postgresql://dagster:local-dagster-password@postgres:5432/dagster
+      PORT: "3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:3001/health', timeout=5)",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 60
+
+volumes:
+  dagster-postgres:
