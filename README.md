@@ -33,6 +33,12 @@ Dagster OSS does not include user authentication. The generated domain is suitab
 
 The template uses `NoOpComputeLogManager`, so structured Dagster event logs are persisted in PostgreSQL but raw stdout and stderr are not shown in the UI. Configure S3, GCS, or Azure compute-log storage when raw logs must survive across services.
 
+## Fork or publish your own version
+
+Marketplace deployments intentionally build from this repository's stable `railway-template-v1` branch, so ordinary template users do not need to change the source.
+
+If you fork this repository or publish a separately maintained variant, update the `github(...)` source in `.railway/railway.ts` to your own `owner/repository`, create the named release branch in that repository, and grant the Railway GitHub App access to it. Applying the IaC without those changes continues to deploy `skyeagle/railway-template-dagster`.
+
 ## Run locally
 
 ```bash
