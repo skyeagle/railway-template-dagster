@@ -4,7 +4,7 @@ This template deploys Dagster OSS as a public webserver, a private daemon, and a
 
 [Deploy Dagster on Railway](https://railway.com/deploy/dagster)
 
-The current template release is `v1.0.0`; Dagster itself is pinned separately to `1.13.15`. See [CHANGELOG.md](CHANGELOG.md) for template changes.
+The current template release is `v1.0.1`; Dagster itself is pinned separately to `1.13.15`. See [CHANGELOG.md](CHANGELOG.md) for template changes.
 
 The included `daily_order_summary` asset and `daily_metrics_job` give a new deployment a deterministic first run. Replace `app/definitions.py` with your own assets, jobs, schedules, sensors, and resources.
 
