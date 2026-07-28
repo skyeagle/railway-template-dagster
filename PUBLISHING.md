@@ -4,7 +4,7 @@ The template is published at `https://railway.com/deploy/dagster`. Its Railway t
 
 Both application services build from the public `tech-progress/railway-template-dagster` repository's `release-v1` branch. The current template release is `v1.0.0`. Tag each verified release with SemVer, then move the matching major release branch only as an explicit template release because connected Railway services may autodeploy branch updates.
 
-Before moving the release branch, update `VERSION` and `CHANGELOG.md`, verify the standalone mirror, and create the release tags:
+Before moving the release branch, update `VERSION` and `CHANGELOG.md` in the private monorepo and verify the standalone mirror. Run these commands from the standalone public repository:
 
 ```bash
 version="$(<VERSION)"
@@ -13,7 +13,13 @@ git push origin "v${version}"
 git push origin "main:release-v${version%%.*}"
 ```
 
-The private authoring monorepo records the same release with the namespaced tag `dagster-v${version}`.
+Then run these commands from the private authoring monorepo root:
+
+```bash
+version="$(<dagster/VERSION)"
+git tag -a "dagster-v${version}" -m "Dagster Railway template v${version}"
+git push origin "dagster-v${version}"
+```
 
 Create a disposable project, apply the Railway configuration, generate a public domain for `Dagster Webserver` on port 3000, and wait for all three deployments:
 

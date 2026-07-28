@@ -43,8 +43,23 @@ if [[ ! "${template_version}" =~ ${semver_pattern} ]]; then
   echo "VERSION must contain one stable MAJOR.MINOR.PATCH version." >&2
   exit 1
 fi
-grep -Fq "## [${template_version}]" "${template_root}/CHANGELOG.md" || {
+escaped_version="${template_version//./\\.}"
+grep -Eq "^## \\[${escaped_version}\\] - [0-9]{4}-[0-9]{2}-[0-9]{2}$" \
+  "${template_root}/CHANGELOG.md" || {
   echo "CHANGELOG.md has no entry for ${template_version}." >&2
+  exit 1
+}
+for file in README.md PUBLISHING.md; do
+  grep -Fq "current template release is \`v${template_version}\`" \
+    "${template_root}/${file}" || {
+    echo "${file} does not identify the current template release." >&2
+    exit 1
+  }
+done
+template_major="${template_version%%.*}"
+grep -Fq "branch: \"release-v${template_major}\"" \
+  "${template_root}/.railway/railway.ts" || {
+  echo ".railway/railway.ts does not use the VERSION major release channel." >&2
   exit 1
 }
 
