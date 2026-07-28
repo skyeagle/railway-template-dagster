@@ -2,7 +2,7 @@
 
 The template is published at `https://railway.com/deploy/dagster`. Its Railway template ID is `03d12173-a2b4-4ebc-bb7d-a6ea683f4a22`, and its deployment code is `dagster`.
 
-Both application services build from the public `skyeagle/railway-template-dagster` repository's `railway-template-v1` branch. Move that branch only as an explicit template release, because connected Railway services may autodeploy branch updates.
+Both application services build from the public `tech-progress/railway-template-dagster` repository's `railway-template-v1` branch. Move that branch only as an explicit template release, because connected Railway services may autodeploy branch updates.
 
 Create a disposable project, apply the Railway configuration, generate a public domain for `Dagster Webserver` on port 3000, and wait for all three deployments:
 

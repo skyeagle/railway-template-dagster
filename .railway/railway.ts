@@ -7,7 +7,7 @@ import {
   service,
 } from "railway/iac";
 
-const SOURCE = github("skyeagle/railway-template-dagster", {
+const SOURCE = github("tech-progress/railway-template-dagster", {
   branch: "railway-template-v1",
   rootDirectory: "/",
 });
