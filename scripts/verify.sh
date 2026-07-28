@@ -62,6 +62,12 @@ grep -Fq "branch: \"release-v${template_major}\"" \
   echo ".railway/railway.ts does not use the VERSION major release channel." >&2
   exit 1
 }
+for file in README.md MARKETPLACE.md PUBLISHING.md; do
+  grep -Fq "\`release-v${template_major}\`" "${template_root}/${file}" || {
+    echo "${file} does not identify the VERSION major release channel." >&2
+    exit 1
+  }
+done
 
 if find "${template_root}" -type f \( -name ".env" -o -name "*.local" \) -print -quit | grep -q .; then
   echo "Local secret file found in the template directory" >&2
