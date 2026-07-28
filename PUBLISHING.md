@@ -2,7 +2,7 @@
 
 The template is published at `https://railway.com/deploy/dagster`. Its Railway template ID is `03d12173-a2b4-4ebc-bb7d-a6ea683f4a22`, and its deployment code is `dagster`.
 
-Both application services build from the public `tech-progress/railway-template-dagster` repository's `release/v1` branch. The current template release is `v1.0.0`. Tag each verified release with SemVer, then move the matching major release branch only as an explicit template release because connected Railway services may autodeploy branch updates.
+Both application services build from the public `tech-progress/railway-template-dagster` repository's `release-v1` branch. The current template release is `v1.0.0`. Tag each verified release with SemVer, then move the matching major release branch only as an explicit template release because connected Railway services may autodeploy branch updates.
 
 Before moving the release branch, update `VERSION` and `CHANGELOG.md`, verify the standalone mirror, and create the release tags:
 
@@ -10,7 +10,7 @@ Before moving the release branch, update `VERSION` and `CHANGELOG.md`, verify th
 version="$(<VERSION)"
 git tag -a "v${version}" -m "Dagster Railway template v${version}"
 git push origin "v${version}"
-git push origin "main:release/v${version%%.*}"
+git push origin "main:release-v${version%%.*}"
 ```
 
 The private authoring monorepo records the same release with the namespaced tag `dagster-v${version}`.

@@ -8,7 +8,7 @@ import {
 } from "railway/iac";
 
 const SOURCE = github("tech-progress/railway-template-dagster", {
-  branch: "release/v1",
+  branch: "release-v1",
   rootDirectory: "/",
 });
 

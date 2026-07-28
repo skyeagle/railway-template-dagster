@@ -37,7 +37,7 @@ The template uses `NoOpComputeLogManager`, so structured Dagster event logs are 
 
 ## Fork or publish your own version
 
-Marketplace deployments intentionally build from this repository's stable `release/v1` branch, so ordinary template users do not need to change the source.
+Marketplace deployments intentionally build from this repository's stable `release-v1` branch, so ordinary template users do not need to change the source.
 
 If you fork this repository or publish a separately maintained variant, update the `github(...)` source in `.railway/railway.ts` to your own `owner/repository`, create the named release branch in that repository, and grant the Railway GitHub App access to it. Applying the IaC without those changes continues to deploy `tech-progress/railway-template-dagster`.
 
