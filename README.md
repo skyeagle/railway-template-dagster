@@ -4,6 +4,8 @@ This template deploys Dagster OSS as a public webserver, a private daemon, and a
 
 [Deploy Dagster on Railway](https://railway.com/deploy/dagster)
 
+The current template release is `v1.0.0`; Dagster itself is pinned separately to `1.13.15`. See [CHANGELOG.md](CHANGELOG.md) for template changes.
+
 The included `daily_order_summary` asset and `daily_metrics_job` give a new deployment a deterministic first run. Replace `app/definitions.py` with your own assets, jobs, schedules, sensors, and resources.
 
 ## Services
@@ -35,7 +37,7 @@ The template uses `NoOpComputeLogManager`, so structured Dagster event logs are 
 
 ## Fork or publish your own version
 
-Marketplace deployments intentionally build from this repository's stable `railway-template-v1` branch, so ordinary template users do not need to change the source.
+Marketplace deployments intentionally build from this repository's stable `release/v1` branch, so ordinary template users do not need to change the source.
 
 If you fork this repository or publish a separately maintained variant, update the `github(...)` source in `.railway/railway.ts` to your own `owner/repository`, create the named release branch in that repository, and grant the Railway GitHub App access to it. Applying the IaC without those changes continues to deploy `tech-progress/railway-template-dagster`.
 

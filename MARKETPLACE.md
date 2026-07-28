@@ -25,4 +25,4 @@ Railway gives the three-service topology private networking, managed public ingr
 
 ### Deployment Dependencies
 
-No user-supplied environment variables are required. Both Dagster services build from the stable `railway-template-v1` branch and receive Railway's private PostgreSQL connection automatically. Dagster OSS does not include user authentication, so place an access-control proxy in front of the public domain before handling sensitive metadata. The single-daemon executor is limited to one concurrent run and is intended for evaluation or small internal workloads.
+No user-supplied environment variables are required. Both Dagster services build from the stable `release/v1` branch and receive Railway's private PostgreSQL connection automatically. Dagster OSS does not include user authentication, so place an access-control proxy in front of the public domain before handling sensitive metadata. The single-daemon executor is limited to one concurrent run and is intended for evaluation or small internal workloads.

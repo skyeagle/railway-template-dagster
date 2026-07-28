@@ -7,12 +7,14 @@ required_files=(
   ".dockerignore"
   ".env.example"
   ".railway/railway.ts"
+  "CHANGELOG.md"
   "Dockerfile"
   "MARKETPLACE.md"
   "PUBLISHING.md"
   "README.md"
   "SUPPORT.md"
   "UPGRADE.md"
+  "VERSION"
   "app/definitions.py"
   "compose.yaml"
   "dagster.yaml"
@@ -34,6 +36,17 @@ for file in "${required_files[@]}"; do
     exit 1
   }
 done
+
+template_version="$(<"${template_root}/VERSION")"
+semver_pattern='^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'
+if [[ ! "${template_version}" =~ ${semver_pattern} ]]; then
+  echo "VERSION must contain one stable MAJOR.MINOR.PATCH version." >&2
+  exit 1
+fi
+grep -Fq "## [${template_version}]" "${template_root}/CHANGELOG.md" || {
+  echo "CHANGELOG.md has no entry for ${template_version}." >&2
+  exit 1
+}
 
 if find "${template_root}" -type f \( -name ".env" -o -name "*.local" \) -print -quit | grep -q .; then
   echo "Local secret file found in the template directory" >&2
