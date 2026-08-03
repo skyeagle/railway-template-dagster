@@ -2,6 +2,8 @@
 
 This template deploys Dagster OSS as a public webserver, a private daemon, and a Railway PostgreSQL database. Both Dagster services build the same stable release branch, while the daemon dequeues and executes at most one run at a time without access to a host Docker socket.
 
+Upstream project: [Dagster](https://dagster.io).
+
 [Deploy Dagster on Railway](https://railway.com/deploy/dagster)
 
 The current template release is `v1.0.1`; Dagster itself is pinned separately to `1.13.15`. See [CHANGELOG.md](CHANGELOG.md) for template changes.
